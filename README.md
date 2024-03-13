@@ -1,8 +1,6 @@
-#Ohjelmistotekniikka#
+#Ohjelmistotekniikka
 
-##harjoitustyö##
+##harjoitustyö
 
 Alustavasti teen harjoitustyönä
-*budjetointiin/rahanhallintaan liittyvän sovelluksen*
-
-
+**budjetointiin/rahanhallintaan** *liittyvän sovelluksen*.
