@@ -1,1 +1,2 @@
-__Komentorivi__ ja __versionhallinta__ ovat jo tuttuja **:)**
+<sup>Komentorivi</sup> ja <sub>versionhallinta</sub> ovat jo tuttuja **:)**
+
