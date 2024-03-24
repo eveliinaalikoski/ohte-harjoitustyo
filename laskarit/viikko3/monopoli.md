@@ -13,10 +13,10 @@
     Aloitusruutu "1" -- "1" Monopolipeli
     Vankila "1" --> "40" Ruutu
     Vankila "1" -- "1" Monopolipeli
-    Ruutu -.-> Toiminto
+    Ruutu --|> Toiminto
     Sattuma -- Kortit
     Yhteismaa -- Kortit
-    Kortit -.-> Toiminto
+    Kortit --|> Toiminto
     Sattuma "3" --> "40" Ruutu
     Yhteismaa "3" --> "40" Ruutu
     Asemat "4" --> "40" Ruutu
@@ -24,7 +24,7 @@
     Kadut "22" -- "40" Ruutu: nimet
     Kadut "1" -- "4" Talo
     Kadut "1" -- "1" Hotelli
-    Hotelli -.-> Talo
+    Hotelli --|> Talo
     Kadut "1..22" -- "1" Pelaaja
-    Pelaaja -.-> Raha
+    Pelaaja --|> Raha
 ```
