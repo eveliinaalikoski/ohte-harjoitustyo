@@ -11,5 +11,3 @@
 
 [laskarit](https://github.com/eveliinaalikoski/ohte-harjoitustyo/tree/master/laskarit)
 
-testi
-uuus
