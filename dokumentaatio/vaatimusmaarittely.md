@@ -14,7 +14,7 @@
     - clothing
 - total +/-
 
-*this is the rough plan and other categories will be added later on*
+*this is the rough plan and other categories can be added later on*
 
 ## Functionality
 
@@ -25,5 +25,12 @@
     - user sees all own budgets in the mainview
     - user can create new budget (with unique name)
     - user can 'enter' to specific budget page
-        - budget can be filled and edited --> budget is made to look like a form
+        - budget can be filled --> budget is made to look like a form
     - user can log out
+
+## Additional ideas
+
+- expanding the budget categories
+- description for budgets
+- editing budgets (name, categories)
+- adding graphics (tables, diagrams)
