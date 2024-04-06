@@ -2,11 +2,6 @@
 
 ```mermaid
 sequenceDiagram
-    <!-- main ->> laitehallinto: HKLLaitehallinto()
-    main ->> rautatientori: Lataajalaite()
-    main ->> ratikka6: Lukijalaite()
-    main ->> bussi244: Lukijalaite() -->
-
     main ->> laitehallinto: lisaa_latajaaja()
     main ->> laitehallinto: lisaa_lukija()
     main ->> laitehallinto: lisaa_lukija()
@@ -23,5 +18,5 @@ sequenceDiagram
     main ->> bussi244: osta_lippu(kallen_kortti, 2)
     bussi244 ->> kallen_kortti: arvo()
     kallen_kortti -->> bussi244: 1.5
-    bussi244 -->> main: False
+    bussi244 -) main: False
 ```
