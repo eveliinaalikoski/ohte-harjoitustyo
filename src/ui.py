@@ -1,6 +1,6 @@
-from tkinter import Tk, ttk, constants
 from login_view import LoginView
 from logout_view import LogoutView
+from front_page_view import FrontPageView
 from budget_view import BudgetView
 
 class UI:
@@ -26,22 +26,29 @@ class UI:
         self._hide_current_view()
         self._current_view = LoginView(
             self._root, 
-            self._handle_logout)
+            self._show_front_page)
         self._current_view.pack()
     
     def _show_logout_view(self):
         self._hide_current_view()
         self._current_view = LogoutView(
             self._root, 
-            self._handle_login)
+            self.start)
         self._current_view.pack()
 
+    def _show_front_page(self):
+        self._hide_current_view()
+        self._current_view = FrontPageView(
+            self._root,
+            self._show_budget_view,
+            self._handle_logout)
+        self._current_view.pack()
 
-    # def _show_budgets_view(self):
-    #     self._hide_current_view()
-    #     self._current_view = BudgetView(
-    #         self._root, 
-    #         self._show_login_view)
+    def _show_budget_view(self):
+        self._hide_current_view()
+        self._current_view = BudgetView(
+            self._root, 
+            self._show_login_view)
 
     # def _show_create_user_view(self):
     #     self._hide_current_view()
