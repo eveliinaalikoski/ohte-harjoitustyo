@@ -10,4 +10,5 @@
 | 25.3. | 0.5 | finished with the description |
 | 26.3. | 1.5 | added needed files and building the structure of code |
 | 2.4. | 1 | login and logout views |
+| 6.4. | 1.5 | working on login&frontpage |
 |  |  |  |
