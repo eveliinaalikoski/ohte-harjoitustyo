@@ -1,7 +1,7 @@
-from login_view import LoginView
-from logout_view import LogoutView
-from front_page_view import FrontPageView
-from budget_view import BudgetView
+from ui.login_view import LoginView
+from ui.logout_view import LogoutView
+from ui.front_page_view import FrontPageView
+from ui.budget_view import BudgetView
 
 class UI:
     def __init__(self, root):
