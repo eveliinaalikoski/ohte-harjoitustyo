@@ -15,13 +15,12 @@ class FrontPageView:
     def destroy(self):
         self._window.destroy()
 
-
     def _label(self):
         logout_button = ttk.Button(master = self._window,
                                    text = "Logout",
                                    command = self._handle_logout)
         label = ttk.Label(master = self._window,
-                          text = "BudgetView",
+                          text = "BudgetBuddy",
                           font = ("Arial", 25))
         logout_button.grid(row = 0, column = 0,
                            padx = 5, pady = 5,
