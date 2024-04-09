@@ -12,5 +12,5 @@
 | 2.4. | 1 | login and logout views |
 | 6.4. | 1.5 | working on login&frontpage |
 | 8.4. | 2.5 | registeration (works) & login & connection to sqlite |
-| 9.4. | 2 | first tests & invoke & created [changelog](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/changelog.md) |
+| 9.4. | 2.5 | first tests & invoke & created [changelog](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/changelog.md) |
 |  |  |  |
