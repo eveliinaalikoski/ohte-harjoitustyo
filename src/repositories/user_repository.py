@@ -14,9 +14,9 @@ class UserRepository:
     
     def find_by_username(self, username):
         cursor = self._connection.cursor()
-        row_id = cursor.execute("""SELECT * FROM users
+        row = cursor.execute("""SELECT * FROM users
                        WHERE username = ?""", [username]).fetchone()
-        return row_id
+        return row
         
 
 user_repository = UserRepository(get_database_connection())
