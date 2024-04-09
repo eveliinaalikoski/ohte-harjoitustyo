@@ -21,7 +21,7 @@ class BudgetService:
     
     def login(self, username, password):
         user = self._user_repository.find_by_username(username)
-        if not user or user.password != password:
+        if not user or user[2] != password:
             raise InvalidCredentialsError("Invalid username or password")
         self._user = user
         return user
@@ -35,4 +35,7 @@ class BudgetService:
             self._user = user
         return user
     
+    def logout(self):
+        self._user = None
+
 budget_service = BudgetService()
