@@ -1,5 +1,5 @@
 from tkinter import ttk, constants, StringVar
-from services.budget_service import budget_service, InvalidCredentialsError
+from services.budget_service import budget_service, InvalidCredentialsError, UsernameAlreadyExistsError
 
 class LoginView:
     def __init__(self, root, handle_login):
@@ -75,8 +75,8 @@ class LoginView:
         try:
             budget_service.register(username, password)
             self._handle_login()
-        except InvalidCredentialsError:
-            self._show_error("Invalid username or password")
+        except UsernameAlreadyExistsError:
+            self._show_error("Username is already taken")
 
     def _show_error(self, message):
         self._error_variable.set(message)
