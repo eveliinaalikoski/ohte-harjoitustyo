@@ -40,7 +40,7 @@ class LoginView:
         
         self._frame.grid_columnconfigure(0, weight = 2, minsize = 400)
         login_button.grid(padx = 5, pady = 5, sticky = constants.W)
-        register_button.grid(padx = 5, pady = 5, sticky = constants.E)        
+        register_button.grid(padx = 5, pady = 5, sticky = constants.W)        
         self._hide_error()
 
     def _initialize_username_field(self):
