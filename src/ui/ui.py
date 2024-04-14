@@ -44,8 +44,10 @@ class UI:
             self._handle_logout)
         self._current_view.pack()
 
-    def _show_budget_view(self):
+    def _show_budget_view(self, budget_name):
         self._hide_current_view()
         self._current_view = BudgetView(
-            self._root, 
-            self._show_login_view)
+            self._root,
+            budget_name,
+            self._show_front_page)
+        self._current_view.pack()
