@@ -9,16 +9,17 @@ def drop_tables(connection):
 def create_user_table(connection):
     cursor = connection.cursor()
     cursor.execute("""CREATE TABLE users
-                   (id PRIMARY KEY,
-                   username TEXT UNIQUE,
+                   (username TEXT UNIQUE,
                    password TEXT);""")
     connection.commit()
 
 def create_budget_table(connection):
     cursor = connection.cursor()
     cursor.execute("""CREATE TABLE budgets
-                   (id PRIMARY KEY,
-                   user_id INTEGER REFERENCES users);""")
+                   (name TEXT UNIQUE,
+                   username TEXT REFERENCES users,
+                   income INTEGER,
+                   rent INTEGER);""")
     # add all the budget topics in tables?
     connection.commit()
 
