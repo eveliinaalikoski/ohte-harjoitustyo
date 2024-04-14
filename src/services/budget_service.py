@@ -2,8 +2,8 @@ from entities.budget import Budget
 from entities.user import User
 from repositories.user_repository import (
     user_repository as default_user_repository)
-# from repositories.budget_repository import (
-#     budget_repository as default_budget_repository)
+from repositories.budget_repository import (
+    budget_repository as default_budget_repository)
 
 class InvalidCredentialsError(Exception):
     pass
@@ -13,15 +13,15 @@ class UsernameAlreadyExistsError(Exception):
 
 class BudgetService:
     def __init__(self,
-                 user_repository = default_user_repository):
+                 user_repository = default_user_repository,
+                 budget_repository = default_budget_repository):
         self._user = None
-        # self._budget_repository = budget_repository
+        self._budget_repository = budget_repository
         self._user_repository = user_repository
-
     
     def login(self, username, password):
         user = self._user_repository.find_by_username(username)
-        if not user or user[2] != password:
+        if not user or user[1] != password:
             raise InvalidCredentialsError("Invalid username or password")
         self._user = user
         return user
@@ -37,5 +37,16 @@ class BudgetService:
     
     def logout(self):
         self._user = None
+
+    def get_budgets(self):
+        budgets = self._budget_repository.find_by_username(self._user[0])
+        return budgets
+
+    def create_budget(self, budget_name):
+        budget = Budget(name = budget_name,
+                        username = self._user[0],
+                        income = 0,
+                        rent = 0)
+        return self._budget_repository.create_budget(budget)
 
 budget_service = BudgetService()
