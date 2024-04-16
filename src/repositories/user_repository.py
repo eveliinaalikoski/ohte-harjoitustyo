@@ -26,7 +26,7 @@ class UserRepository:
         if not row:
             return None
         return User(row[0], row[1])
-    
+
     def delete(self):
         cursor = self._connection.cursor()
         cursor.execute("DELETE FROM users")

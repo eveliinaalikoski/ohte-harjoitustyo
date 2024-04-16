@@ -1,23 +1,25 @@
 import unittest
-from services.budget_service import (BudgetService, 
-                                     InvalidCredentialsError, 
+from services.budget_service import (BudgetService,
+                                     InvalidCredentialsError,
                                      UsernameAlreadyExistsError)
 from entities.user import User
 from entities.budget import Budget
 
+
 class BudgetRepositoryTests:
-    def __init__(self, budgets = None):
+    def __init__(self, budgets=None):
         self.budgets = budgets or []
 
     def get_all(self):
         return self.budgets
 
     def find_by_username(self, username):
-        own_budgets = filter(lambda budget: budget.username == username, self.budgets)
+        own_budgets = filter(
+            lambda budget: budget.username == username, self.budgets)
         return list(own_budgets)
 
     def get_by_budget_name(self, budget_name, username):
-        own_budget = filter(lambda budget: budget.name == budget_name 
+        own_budget = filter(lambda budget: budget.name == budget_name
                             and budget.username == username, self.budgets)
         return own_budget
 
@@ -28,10 +30,11 @@ class BudgetRepositoryTests:
     def delete(self):
         self.budgets = []
 
+
 class UserRepositoryTests:
     def __init__(self, users=None):
         self.users = users or []
-    
+
     def get_all(self):
         return self.users
 
@@ -46,6 +49,7 @@ class UserRepositoryTests:
 
     def delete(self):
         self.users = []
+
 
 class TestBudgetService(unittest.TestCase):
     def setUp(self):
@@ -69,9 +73,9 @@ class TestBudgetService(unittest.TestCase):
         self.assertEqual(user.username, self.user_test.username)
 
     def test_login_with_invalid_credentials(self):
-        self.assertRaises(InvalidCredentialsError, 
-                          lambda:self.budget_service.login("invalid", "credentials"))
-        
+        self.assertRaises(InvalidCredentialsError,
+                          lambda: self.budget_service.login("invalid", "credentials"))
+
     def test_register_with_valid_credentials(self):
         username = self.user_test.username
         password = self.user_test.password
@@ -84,7 +88,7 @@ class TestBudgetService(unittest.TestCase):
         self.budget_service.register(username, "test")
         self.assertRaises(UsernameAlreadyExistsError,
                           lambda: self.budget_service.register(username, "lalala"))
-        
+
     def test_logout(self):
         self.login_user(self.user_test)
         user = self.budget_service.logout()
@@ -92,7 +96,9 @@ class TestBudgetService(unittest.TestCase):
 
     def test_get_budgets(self):
         pass
+
     def test_create_budget(self):
         pass
+
     def test_budget_info(self):
         pass

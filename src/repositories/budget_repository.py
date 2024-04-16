@@ -32,8 +32,8 @@ class BudgetRepository:
     def get_by_budget_name(self, budget_name, username):
         cursor = self._connection.cursor()
         budget = cursor.execute("""SELECT * FROM budgets
-                       WHERE name = ? AND username = ?""", 
-                       (budget_name, username)).fetchall()
+                       WHERE name = ? AND username = ?""",
+                                (budget_name, username)).fetchall()
         return budget
 
     def _file_exists(self):
@@ -54,7 +54,6 @@ class BudgetRepository:
         print(budgets)
         self._add(budget)
 
-
     def _add(self, budget):
         self._file_exists()
         name = budget.name
@@ -67,7 +66,7 @@ class BudgetRepository:
         with open(self._file_path, "a") as file:
             file.write((name)+";")
             file.write((username)+"\n")
-        
+
         cursor = self._connection.cursor()
         cursor.execute("""INSERT INTO budgets 
                        (name, username, income, rent, groceries, 
@@ -81,4 +80,5 @@ class BudgetRepository:
             file.write("")
 
 
-budget_repository = BudgetRepository(BUDGET_FILE_PATH, get_database_connection())
+budget_repository = BudgetRepository(
+    BUDGET_FILE_PATH, get_database_connection())
