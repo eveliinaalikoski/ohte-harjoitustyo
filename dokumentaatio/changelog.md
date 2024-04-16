@@ -8,4 +8,16 @@
 - base entities made for user and budget
 - user repository that saves data
 - budget service that answer for app logic
-- test started: user login
+- tests started: user login
+
+## Week 4
+
+- new functionality to front page:
+    - logout button
+    - button to create new budget
+    - list of user's budgets
+- budget page made:
+    - button to go back to the front page
+    - list of budget topics (made to look like a form)
+        - changing the values of topics doesn't do anything yet
+- tests: BudgetService
