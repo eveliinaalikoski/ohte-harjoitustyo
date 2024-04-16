@@ -37,12 +37,12 @@ class BudgetService:
         if user_exists:
             raise UsernameAlreadyExistsError("Username is already taken")
         user = self._user_repository.create(User(username, password))
-        if login:
-            self._user = User(username, password)
+        self._user = User(username, password)
         return user
 
     def logout(self):
         self._user = None
+        return self._user
 
     def get_budgets(self):
         budgets = self._budget_repository.find_by_username(self._user.username)
