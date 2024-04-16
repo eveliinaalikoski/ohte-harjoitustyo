@@ -14,4 +14,8 @@
 | 8.4. | 2.5 | registeration (works) & login & connection to sqlite |
 | 9.4. | 2.5 | first tests & invoke & created [changelog](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/changelog.md) |
 |  | 1 | login & logout works |
+| 12.4. | 1 | started front page with budget lists|
+| 14.4. | 2.5 | front page & budget page |
+| 15.4. | 2 | budget view |
+| 16.4. | 3 | sql table budgets & tests |
 |  |  |  |
