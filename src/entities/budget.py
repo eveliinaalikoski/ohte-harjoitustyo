@@ -1,12 +1,7 @@
 class Budget:
-    def __init__(self, 
-                 name = None,
-                 username = None, 
-                 income = None,
-                 rent = None):
+    def __init__(self, name=None, username=None):
         self.name = name
         self.username = username
-        self.income = income
-        self.rent = rent
 
-        # add all the topics
+        # add more topics ?
+        # only name, username in this (?) and the ofter stuff to sql
