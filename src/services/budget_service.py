@@ -54,18 +54,32 @@ class BudgetService:
         return self._budget_repository.create_budget(budget)
 
     def get_budget_info(self, budget_name, username):
-        x = self._budget_repository.get_by_budget_name(budget_name, username)
-        print(x)
-        return x[0]
+        info = self._budget_repository.get_by_budget_name(budget_name, username)
+        print(list(info))
+        return list(info)
 
-    # DO LATER (in csv or move to sql???)
-    # def update_budget(self, budget_name,
-    #                   income,
-    #                   rent,
-    #                   groceries,
-    #                   transportation,
-    #                   hobbies):
-    #     budget =
-
+    def update_budget(self, budget_name, 
+                      username,
+                      income,
+                      rent,
+                      groceries,
+                      transportation,
+                      hobbies):
+        self._budget_repository.update_budget(budget_name,
+                                              username,
+                                              income,
+                                              rent,
+                                              groceries,
+                                              transportation,
+                                              hobbies)
+        
+    def check_budget_name(self, budget_name):
+        list = self._budget_repository._get_all()
+        print(list)
+        for l in list:
+            part = l.split(";")
+            if budget_name == part[0]:
+                return False
+        return True
 
 budget_service = BudgetService()
