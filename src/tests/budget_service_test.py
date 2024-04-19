@@ -53,9 +53,11 @@ class UserRepositoryTests:
 
 class TestBudgetService(unittest.TestCase):
     def setUp(self):
-        self.budget_service = BudgetService(UserRepositoryTests())
+        self.budget_service = BudgetService(UserRepositoryTests(),
+                                            BudgetRepositoryTests())
         self.user_test = User("test", "test123")
-        self.budget1 = Budget()
+        self.budget1 = Budget("first", self.user_test.username)
+        self.budget2 = Budget("second", self.user_test.username)
 
     def login_user(self, user):
         self.budget_service.register(user.username, user.password)
@@ -95,10 +97,29 @@ class TestBudgetService(unittest.TestCase):
         self.assertEqual(None, user)
 
     def test_get_budgets(self):
-        pass
+        self.login_user(self.user_test)
+        self.budget_service.create_budget(self.budget1.name)
+        self.budget_service.create_budget(self.budget2.name)
+        budgets = self.budget_service.get_budgets()
+        self.assertEqual(len(budgets), 2)
+        self.assertEqual(budgets[0].name, self.budget1.name)
 
     def test_create_budget(self):
-        pass
+        self.login_user(self.user_test)
+        self.budget_service.create_budget("testing")
+        budgets = self.budget_service.get_budgets()
+        self.assertEqual(len(budgets), 1)
+        self.assertEqual(budgets[0].name, "testing")
+        self.assertEqual(budgets[0].username, self.user_test.username)
 
     def test_budget_info(self):
-        pass
+        self.login_user(self.user_test)
+        self.budget_service.create_budget(self.budget1.name)
+        info = self.budget_service.get_budget_info(self.budget1.name, self.user_test.username)
+        # self.assertEqual(info, [self.budget1.name,
+        #                         self.user_test.username,
+        #                         0, 0, 0, 0, 0])
+        # self.assertEqual(info[1], self.budget1.username)
+        # self.assertEqual(info[2], self.budget1.username)
+        # self.assertEqual(info[3], self.budget1.username)
+        # self.assertEqual()
