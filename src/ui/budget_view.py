@@ -25,7 +25,7 @@ class BudgetView:
         label = ttk.Label(master=self._budget_frame,
                           text=self._budget_name,
                           font=("Arial", 25),
-                          foreground="blue")
+                          foreground="#287ed7")
         front_button.grid(row=0, column=0,
                           padx=5, pady=5,
                           sticky=constants.W)
@@ -36,7 +36,7 @@ class BudgetView:
     def _budget_info(self):
         budget = budget_service.get_budget_info(
             self._budget_name, self._user.username)
-        expences = 0000  # do the sum!!
+        expences = sum(budget[3:])
         print("äääää", budget, budget[0])
 
         self._income_expences_field(budget[2], expences)
@@ -44,6 +44,7 @@ class BudgetView:
         self._groceries_field(budget[4])
         self._transportation_field(budget[5])
         self._hobbies_field(budget[6])
+        self._total(budget[2], expences)
 
     def _income_expences_field(self, income, expences):
         income_text = ttk.Label(master=self._budget_frame,
@@ -117,19 +118,45 @@ class BudgetView:
                                  padx=5, pady=5,
                                  sticky=constants.EW)
 
-    # def update(self):
-    #     income = self._income_entry.get()
-    #     rent = self._rent_entry.get()
-    #     groceries = self._groceries_entry.get()
-    #     transportation = self._transportation_entry.get()
-    #     hobbies = self._hobbies_entry.get()
+    def _total(self, income, expences):
+        money = income - expences
+        total = "total:", money
+        total_text = ttk.Label(master = self._budget_frame, text = total, background = "#287ed7")
+        total_text.grid(row=16, column=1,
+                    padx=5, pady=5,
+                    sticky=constants.E)
 
-    #     budget_service.update_budget(self._budget_name,
-    #                                  income,
-    #                                  rent,
-    #                                  groceries,
-    #                                  transportation,
-    #                                  hobbies)
+    def _update_button(self):
+        update_button = ttk.Button(master=self._budget_frame,
+                                  text="Update",
+                                  command=self._update)
+        update_button.grid(row=18, column=0,
+                          padx=5, pady=5,
+                          sticky=constants.W)
+
+    def _update(self):
+        income = self._income_entry.get()
+        if not income:
+            income = 0
+        rent = self._rent_entry.get()
+        if not rent:
+            rent = 0
+        groceries = self._groceries_entry.get()
+        if not groceries:
+            groceries = 0
+        transportation = self._transportation_entry.get()
+        if not transportation:
+            transportation = 0
+        hobbies = self._hobbies_entry.get()
+        if not hobbies:
+            hobbies = 0
+        budget_service.update_budget(self._budget_name,
+                                     income,
+                                     rent,
+                                     groceries,
+                                     transportation,
+                                     hobbies)
+        self._budget_info()
 
     def _budget_window(self):
         self._window = ttk.Frame(master=self._root)
@@ -137,7 +164,7 @@ class BudgetView:
 
         self._label()
         self._budget_info()
-        # self._update() will be added laterr
+        self._update_button()
 
         self._budget_frame.grid(row=4, column=0,
                                 columnspan=2,
