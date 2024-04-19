@@ -1,4 +1,4 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, StringVar
 from services.budget_service import budget_service
 from entities.budget import Budget
 from ui.budget_view import BudgetView
@@ -48,7 +48,8 @@ class FrontPageView:
         self._handle_logout = handle_logout
         self._window = None
         self._budget_list_view = None
-
+        self._error_variable = None
+        self._error_label = None
         self._front_page_view()
 
     def pack(self):
@@ -56,6 +57,13 @@ class FrontPageView:
 
     def destroy(self):
         self._window.destroy()
+
+    def _show_error(self, message):
+        self._error_variable.set(message)
+        self._error_label.grid()
+
+    def _hide_error(self):
+        self._error_label.grid_remove()
 
     def _label(self):
         logout_button = ttk.Button(master=self._window,
@@ -74,6 +82,10 @@ class FrontPageView:
 
     def _create_helper(self):
         name_entry = self._new_name.get()
+        if budget_service.check_budget_name(name_entry) == False:
+            self._show_error("Budget name taken")
+            return
+        self._hide_error()
         if name_entry:
             budget_service.create_budget(name_entry)
             self._budget_list()
@@ -81,15 +93,20 @@ class FrontPageView:
 
     def _new_budget(self):
         self._new_name = ttk.Entry(master=self._window)
+        self._new_name.insert(0, "budget name")
         new_button = ttk.Button(master=self._window,
                                 text="Create new budget",
                                 command=self._create_helper)
-        self._new_name.grid(row=4, column=0,
+        self._new_name.grid(row=6, column=0,
                             padx=5, pady=5,
                             sticky=constants.EW)
-        new_button.grid(row=4, column=1,
+        new_button.grid(row=6, column=1,
                         padx=5, pady=5,
                         sticky=constants.EW)
+        self._new_name.bind("<FocusIn>", self._name_delete)
+
+    def _name_delete(self, e):
+        self._new_name.delete(0, "end")
 
     def _budget_list(self):
         if self._budget_list_view:
@@ -104,11 +121,20 @@ class FrontPageView:
     def _front_page_view(self):
         self._window = ttk.Frame(master=self._root)
         self._front_page_frame = ttk.Frame(master=self._window)
+        
+        self._error_variable = StringVar(self._window)
+        self._error_label = ttk.Label(master=self._window,
+                                      textvariable=self._error_variable,
+                                      foreground="red")
+        self._error_label.grid(row=4, padx=5, pady=5)
+
         self._label()
         self._new_budget()
         self._budget_list()
-        self._front_page_frame.grid(row=6, column=0,
+
+        self._front_page_frame.grid(row=8, column=0,
                                     columnspan=2,
                                     sticky=constants.EW)
         self._window.grid_columnconfigure(0, weight=1, minsize=400)
         self._window.grid_columnconfigure(1, weight=0)
+        self._hide_error()
