@@ -20,11 +20,6 @@ class BudgetRepository:
             part = row.split(";")
             budget_name = part[0]
             user = part[1]
-            # income = part[2]
-            # rent = part[3]
-            # groceries = part[4]
-            # transportation = part[5]
-            # hobbies = part[6]
             if username == user:
                 own_budgets.append(Budget(budget_name, user))
         return own_budgets
@@ -34,7 +29,7 @@ class BudgetRepository:
         budget = cursor.execute("""SELECT * FROM budgets
                        WHERE name = ? AND username = ?""",
                                 (budget_name, username)).fetchall()
-        return budget
+        return budget[0]
 
     def _file_exists(self):
         Path(self._file_path).touch()
@@ -58,11 +53,6 @@ class BudgetRepository:
         self._file_exists()
         name = budget.name
         username = budget.username
-        # income = str(budget.income)
-        # rent = str(budget.rent)
-        # groceries = str(budget.groceries)
-        # transportation = str(budget.transportation)
-        # hobbies = str(budget.hobbies)
         with open(self._file_path, "a") as file:
             file.write((name)+";")
             file.write((username)+"\n")
@@ -74,6 +64,15 @@ class BudgetRepository:
                        VALUES (?, ?, 0, 0, 0, 0, 0)""",
                        (name, username))
         self._connection.commit()
+
+    def update_budget(self, budget_name, username, income, rent, groceries, transportation, hobbies):
+        cursor = self._connection.cursor()
+        cursor.execute("""UPDATE budgets
+                       SET income = ?, rent = ?, groceries = ?, 
+                       transportation = ?, hobbies = ?
+                       WHERE name = ? AND username = ?""",
+                       (income, rent, groceries, transportation, hobbies, budget_name, username))
+        self._connection.commit()    
 
     def delete(self):
         with open(self._file_path, "w") as file:
