@@ -74,6 +74,32 @@ class BudgetRepository:
                        (income, rent, groceries, transportation, hobbies, budget_name, username))
         self._connection.commit()    
 
+    def add_topic(self, budget_name, topic):
+        cursor = self._connection.cursor()
+        cursor.execute("""INSERT INTO topics
+                       (budget_name, topic, amount)
+                       VALUES (?, ?, 0)""",
+                       (budget_name, topic))
+        self._connection.commit()
+
+    def update_topic(self, budget_name, topic, amount):
+        cursor = self._connection.cursor()
+        cursor.execute("""UPDATE topics
+                       SET amount = ?
+                       WHERE budget_name = ? AND topic = ?""",
+                       (amount, budget_name, topic))
+        self._connection.commit()
+
+    def get_topics(self, budget_name):
+        print(budget_name)
+        cursor = self._connection.cursor()
+        topics = cursor.execute("""SELECT topic, amount
+                       FROM topics
+                       WHERE budget_name = ?;""",
+                       (budget_name,)).fetchall()
+        print(topics)
+        return topics
+
     def delete(self):
         with open(self._file_path, "w") as file:
             file.write("")
