@@ -1,7 +1,6 @@
-from entities.budget import Budget
-from repositories.user_repository import user_repository
-from config import BUDGET_FILE_PATH
 from pathlib import Path
+from entities.budget import Budget
+from config import BUDGET_FILE_PATH
 from database_connection import get_database_connection
 
 
@@ -10,11 +9,11 @@ class BudgetRepository:
         self._file_path = file_path
         self._connection = connection
 
-    def _get_all(self):
+    def get_all(self):
         return self._read()
 
     def find_by_username(self, username):
-        budgets = self._get_all()
+        budgets = self.get_all()
         own_budgets = []
         for row in budgets:
             part = row.split(";")
@@ -44,7 +43,7 @@ class BudgetRepository:
         return budget_list
 
     def create_budget(self, budget):
-        budgets = self._get_all()
+        budgets = self.get_all()
         budgets.append(budget)
         print(budgets)
         self._add(budget)
