@@ -32,7 +32,7 @@ class BudgetService:
         self._user = User(username, password)
         return user
 
-    def register(self, username, password, login=True):
+    def register(self, username, password):
         user_exists = self._user_repository.find_by_username(username)
         if user_exists:
             raise UsernameAlreadyExistsError("Username is already taken")
@@ -74,10 +74,10 @@ class BudgetService:
                                               hobbies)
         
     def check_budget_name(self, budget_name):
-        list = self._budget_repository._get_all()
-        print(list)
-        for l in list:
-            part = l.split(";")
+        all = self._budget_repository.get_all()
+        print(all)
+        for a in all:
+            part = a.split(";")
             if budget_name == part[0]:
                 return False
         return True
