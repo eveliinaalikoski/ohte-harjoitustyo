@@ -2,6 +2,8 @@
 
 ## BudgetBuddy
 
+App to plan your spendings with budgets. You can create as many budgets you need and update them later on. 
+
 ### dokumentation
 
 - [working hours](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
