@@ -21,3 +21,10 @@
     - list of budget topics (made to look like a form)
         - changing the values of topics doesn't do anything yet
 - tests: BudgetService
+
+## Week 5
+
+- added error message to front page if budget name is taken
+- budget categories can be updated
+- user can add topics to budgets (can't update them yet)
+- tests: BudgetService, BudgetRepository, UserRepository
