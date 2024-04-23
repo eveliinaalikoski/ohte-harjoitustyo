@@ -64,20 +64,20 @@ class BudgetView:
         self._income_entry.grid(row=4, column=1,
                                 padx=5, pady=5,
                                 sticky=constants.EW)
-        
+
         expences_text = ttk.Label(master=self._budget_frame,
                                   text="expences:",
                                   background="#ed8d12")
         value_text = ttk.Label(master=self._budget_frame,
-                                  text=expences,
-                                  background="#ed8d12")
+                               text=expences,
+                               background="#ed8d12")
         expences_text.grid(row=6, column=0,
                            padx=5, pady=5,
                            sticky=constants.EW)
         value_text.grid(row=6, column=1,
-                           padx=5, pady=5,
-                           sticky=constants.EW)
-        
+                        padx=5, pady=5,
+                        sticky=constants.EW)
+
     def _rent_field(self, rent):
         rent_text = ttk.Label(master=self._budget_frame,
                               text="   rent:")
@@ -132,7 +132,7 @@ class BudgetView:
         for m in more:
             string = "   " + m[0] + ":"
             more_text = ttk.Label(master=self._budget_frame,
-                                 text=string)
+                                  text=string)
             self._more_entry = ttk.Entry(master=self._budget_frame)
             self._more_entry.insert(0, m[1])
             more_text.grid(row=self._row, column=0,
@@ -148,8 +148,8 @@ class BudgetView:
             self._topics.append((m[0], amount))
 
     def _topic_update(self):
-        ## doesn't work yet, it should go through the added topics
-        ## at this point, not in more_field like it does now
+        # doesn't work yet, it should go through the added topics
+        # at this point, not in more_field like it does now
         for topic in self._topics:
             print("topic update", topic[0], topic[1])
             budget_service.update_topics(self._budget_name, topic[0], topic[1])
@@ -160,21 +160,22 @@ class BudgetView:
             self._add_topic_text.destroy()
             self._add_button.destroy()
 
-        self._add_topic_text = ttk.Label(master=self._budget_frame, text = "create new topic:")
+        self._add_topic_text = ttk.Label(
+            master=self._budget_frame, text="create new topic:")
         self._add_entry = ttk.Entry(master=self._budget_frame)
         self._add_button = ttk.Button(master=self._budget_frame,
-                                  text="Add",
-                                  command=self._add_helper)
+                                      text="Add",
+                                      command=self._add_helper)
         self._add_topic_text.grid(row=self._row, column=0,
-                  padx=5, pady=5,
-                  sticky=constants.EW)
+                                  padx=5, pady=5,
+                                  sticky=constants.EW)
         self._row += 2
-        self._add_entry.grid(row = self._row, column=0,
+        self._add_entry.grid(row=self._row, column=0,
                              padx=5, pady=5,
-                             sticky=constants.EW)  
+                             sticky=constants.EW)
         self._add_button.grid(row=self._row, column=1,
-                          padx=5, pady=5,
-                          sticky=constants.W)
+                              padx=5, pady=5,
+                              sticky=constants.W)
 
     def _add_helper(self):
         topic_entry = self._add_entry.get()
@@ -188,21 +189,22 @@ class BudgetView:
     def _total(self, income, expences):
         money = income - expences
         total = "total:", money
-        total_text = ttk.Label(master = self._budget_frame, text = total, background = "#287ed7")
+        total_text = ttk.Label(master=self._budget_frame,
+                               text=total, background="#287ed7")
         total_text.grid(row=self._row, column=1,
-                    padx=5, pady=5,
-                    sticky=constants.E)
+                        padx=5, pady=5,
+                        sticky=constants.E)
         self._row += 2
 
     def _updating_button(self):
         if self._update_button:
             self._update_button.destroy()
         self._update_button = ttk.Button(master=self._budget_frame,
-                                  text="Update",
-                                  command=self._update)
+                                         text="Update",
+                                         command=self._update)
         self._update_button.grid(row=self._row, column=0,
-                          padx=5, pady=5,
-                          sticky=constants.W)
+                                 padx=5, pady=5,
+                                 sticky=constants.W)
         self._row += 2
 
     def _update(self):

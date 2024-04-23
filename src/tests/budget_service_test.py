@@ -115,7 +115,8 @@ class TestBudgetService(unittest.TestCase):
     def test_budget_info(self):
         self.login_user(self.user_test)
         self.budget_service.create_budget(self.budget1.name)
-        info = self.budget_service.get_budget_info(self.budget1.name, self.user_test.username)
+        info = self.budget_service.get_budget_info(
+            self.budget1.name, self.user_test.username)
         # self.assertEqual(info, [self.budget1.name,
         #                         self.user_test.username,
         #                         0, 0, 0, 0, 0])

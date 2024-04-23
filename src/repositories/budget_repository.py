@@ -71,7 +71,7 @@ class BudgetRepository:
                        transportation = ?, hobbies = ?
                        WHERE name = ? AND username = ?""",
                        (income, rent, groceries, transportation, hobbies, budget_name, username))
-        self._connection.commit()    
+        self._connection.commit()
 
     def add_topic(self, budget_name, topic):
         cursor = self._connection.cursor()
@@ -95,7 +95,7 @@ class BudgetRepository:
         topics = cursor.execute("""SELECT topic, amount
                        FROM topics
                        WHERE budget_name = ?;""",
-                       (budget_name,)).fetchall()
+                                (budget_name,)).fetchall()
         print(topics)
         return topics
 

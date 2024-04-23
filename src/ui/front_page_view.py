@@ -121,7 +121,7 @@ class FrontPageView:
     def _front_page_view(self):
         self._window = ttk.Frame(master=self._root)
         self._front_page_frame = ttk.Frame(master=self._window)
-        
+
         self._error_variable = StringVar(self._window)
         self._error_label = ttk.Label(master=self._window,
                                       textvariable=self._error_variable,

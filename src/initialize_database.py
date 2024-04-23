@@ -30,6 +30,7 @@ def create_budget_table(connection):
     # add all the budget topics in tables?
     connection.commit()
 
+
 def create_topics_table(connection):
     cursor = connection.cursor()
     cursor.execute("""CREATE TABLE topics
@@ -37,6 +38,7 @@ def create_topics_table(connection):
                    topic TEXT,
                    amount INTEGER);""")
     connection.commit()
+
 
 def initialize_database():
     connection = get_database_connection()

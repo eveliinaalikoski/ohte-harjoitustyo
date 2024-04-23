@@ -54,11 +54,12 @@ class BudgetService:
         return self._budget_repository.create_budget(budget)
 
     def get_budget_info(self, budget_name, username):
-        info = self._budget_repository.get_by_budget_name(budget_name, username)
+        info = self._budget_repository.get_by_budget_name(
+            budget_name, username)
         print(list(info))
         return list(info)
 
-    def update_budget(self, budget_name, 
+    def update_budget(self, budget_name,
                       username,
                       income,
                       rent,
@@ -72,7 +73,7 @@ class BudgetService:
                                               groceries,
                                               transportation,
                                               hobbies)
-        
+
     def check_budget_name(self, budget_name):
         all = self._budget_repository.get_all()
         print(all)
@@ -81,15 +82,16 @@ class BudgetService:
             if budget_name == part[0]:
                 return False
         return True
-    
+
     def add_topic(self, budget_name, topic_entry):
         self._budget_repository.add_topic(budget_name, topic_entry)
 
     def update_topics(self, budget_name, topic, amount):
         self._budget_repository.update_topic(budget_name, topic, amount)
-    
+
     def get_topics(self, budget_name):
         topics = self._budget_repository.get_topics(budget_name)
         return topics
+
 
 budget_service = BudgetService()

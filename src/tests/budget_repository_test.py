@@ -4,6 +4,7 @@ from repositories.user_repository import user_repository
 from entities.budget import Budget
 from entities.user import User
 
+
 class TestBudgetRepository(unittest.TestCase):
     def setUp(self):
         budget_repository.delete()
