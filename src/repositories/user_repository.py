@@ -13,7 +13,7 @@ class UserRepository:
 
     def create(self, user):
         cursor = self._connection.cursor()
-        cursor.execute("""INSERT INTO users (username, password) 
+        cursor.execute("""INSERT INTO users (username, password)
                        VALUES (?, ?)""", (user.username, user.password))
         self._connection.commit()
         return user

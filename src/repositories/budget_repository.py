@@ -57,14 +57,15 @@ class BudgetRepository:
             file.write((username)+"\n")
 
         cursor = self._connection.cursor()
-        cursor.execute("""INSERT INTO budgets 
+        cursor.execute("""INSERT INTO budgets
                        (name, username, income, rent, groceries, 
                        transportation, hobbies)
                        VALUES (?, ?, 0, 0, 0, 0, 0)""",
                        (name, username))
         self._connection.commit()
 
-    def update_budget(self, budget_name, username, income, rent, groceries, transportation, hobbies):
+    def update_budget(self, budget_name, username, income, 
+                      rent, groceries, transportation, hobbies):
         cursor = self._connection.cursor()
         cursor.execute("""UPDATE budgets
                        SET income = ?, rent = ?, groceries = ?, 
