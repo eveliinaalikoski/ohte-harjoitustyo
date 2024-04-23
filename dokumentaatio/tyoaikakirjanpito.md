@@ -18,4 +18,10 @@
 | 14.4. | 2.5 | front page & budget page |
 | 15.4. | 2 | budget view |
 | 16.4. | 3 | sql table budgets & tests |
+| 19.4. | 3 | tests & update budgets |
+| 21.4. | 2 | budgetview (topics) |
+| 22.4. | 2.5 | budgetview (topics update) |
+| 23.4. | 1.5 | lint errors & architecture & release |
 |  |  |  |
+|  |  |  |
+|  |  | = 31 h |
