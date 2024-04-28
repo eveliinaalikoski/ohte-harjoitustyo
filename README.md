@@ -41,4 +41,4 @@ test coverage report:
 
 Pylint check
 
-```poetry run invoke pylint```
+```poetry run invoke lint```
