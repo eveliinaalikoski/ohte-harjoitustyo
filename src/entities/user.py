@@ -1,5 +1,6 @@
 class User:
     """class that represents a user"""
+
     def __init__(self, username, password):
         """class constructor, creates new user
 

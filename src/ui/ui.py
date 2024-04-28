@@ -6,6 +6,7 @@ from ui.budget_view import BudgetView
 
 class UI:
     """Class responsible for the user interface"""
+
     def __init__(self, root):
         """Class constructor, creates new ui class
 

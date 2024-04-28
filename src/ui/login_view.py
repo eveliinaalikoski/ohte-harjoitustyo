@@ -4,6 +4,7 @@ from services.budget_service import budget_service, InvalidCredentialsError, Use
 
 class LoginView:
     """View responsible for user login and registeration"""
+
     def __init__(self, root, handle_login):
         """Class constructor, creates new login view
 

@@ -4,6 +4,7 @@ from database_connection import get_database_connection
 
 class UserRepository:
     """class responsible for database functions about users"""
+
     def __init__(self, connection):
         """class constructor
 
@@ -24,10 +25,10 @@ class UserRepository:
 
     def create(self, user):
         """saves user's information to database
-        
+
         Args:
             user: to be saved information as User-object
-        
+
         Returns:
             user: saved User-object
         """
@@ -39,7 +40,7 @@ class UserRepository:
 
     def find_by_username(self, username):
         """Returns user with username
-        
+
         Args:
             username: username of user that is returned
 

@@ -4,6 +4,7 @@ from services.budget_service import budget_service
 
 class BudgetListView:
     """View responsible for listing budgets"""
+
     def __init__(self, root, budgets, show_budget_view):
         """Class constructor, creates new list view for budgets
 
@@ -50,6 +51,7 @@ class BudgetListView:
 
 class FrontPageView:
     """View responsible for showing front page"""
+
     def __init__(self, root, show_budget_view, handle_logout):
         """Class constructor, creates new front page view
 

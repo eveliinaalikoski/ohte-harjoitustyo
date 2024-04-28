@@ -4,6 +4,7 @@ from services.budget_service import budget_service
 
 class LogoutView:
     """View responsible for user logout"""
+
     def __init__(self, root, handle_logout):
         """Class constructor, creates new logout view
 

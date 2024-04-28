@@ -1,5 +1,6 @@
 class Budget:
     """class that represents a budget"""
+
     def __init__(self, name=None, username=None):
         """class constructor, creates new budget
 

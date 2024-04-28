@@ -24,7 +24,8 @@ class TestBudgetRepository(unittest.TestCase):
 
     def test_get_by_budget_name(self):
         budget_repository.create_budget(self.budget1)
-        budget = budget_repository.get_by_budget_name(self.budget1.name, self.user_berta.username)
+        budget = budget_repository.get_by_budget_name(
+            self.budget1.name, self.user_berta.username)
         self.assertEqual(len(budget), 7)
 
     def test_add_topic(self):
