@@ -25,9 +25,7 @@ def create_budget_table(connection):
                    income INTEGER,
                    rent INTEGER,
                    groceries INTEGER,
-                   transportation INTEGER,
                    hobbies INTEGER);""")
-    # add all the budget topics in tables?
     connection.commit()
 
 
