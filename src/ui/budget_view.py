@@ -3,7 +3,15 @@ from services.budget_service import budget_service
 
 
 class BudgetView:
+    """View responsible for showing budget view"""
     def __init__(self, root, budget_name, to_front_page):
+        """class constructor, creates new budget view
+
+        Args:
+            root: Tkinter-element where the view is created
+            budget_name (variable): name of the viewed budget
+            to_front_page (value): called to see front page
+        """
         self._root = root
         self._budget_name = budget_name
         self._to_front_page = to_front_page
@@ -17,9 +25,11 @@ class BudgetView:
         self._budget_window()
 
     def pack(self):
+        """shows window"""
         self._window.pack(fill=constants.X)
 
     def destroy(self):
+        """destroys window"""
         self._window.destroy()
 
     def _label(self):

@@ -5,25 +5,53 @@ from database_connection import get_database_connection
 
 
 class BudgetRepository:
+    """class responsible for database functions about budgets"""
     def __init__(self, file_path, connection):
+        """class constructor
+
+        Args:
+            file_path: path to the file information in written in
+            connection: database connection-object
+        """
         self._file_path = file_path
         self._connection = connection
 
     def get_all(self):
+        """returns all budgets
+
+        Returns:
+            list: list of tuples where is budget name and username
+        """
         return self._read()
 
     def find_by_username(self, username):
+        """finds the budgets current user has created
+
+        Args:
+            username (str-string): username whose budgets are searched
+
+        Returns:
+            list: list of Budget-objects
+        """
         budgets = self.get_all()
         own_budgets = []
         for row in budgets:
-            part = row.split(";")
-            budget_name = part[0]
-            user = part[1]
+            budget_name = row[0]
+            user = row[1]
             if username == user:
                 own_budgets.append(Budget(budget_name, user))
         return own_budgets
 
     def get_by_budget_name(self, budget_name, username):
+        """Returns all budget information by budgetname and username
+        
+        Args:
+            budget_name: name of the searched budget
+            username: name of user that is currently logged in
+        
+        Returns:
+            list of all budget information from table budgets
+        """
         cursor = self._connection.cursor()
         budget = cursor.execute("""SELECT * FROM budgets
                        WHERE name = ? AND username = ?""",
@@ -39,10 +67,16 @@ class BudgetRepository:
         with open(self._file_path) as file:
             for row in file:
                 row = row.replace("\n", "")
-                budget_list.append(row)
+                part = row.split(";")
+                budget_list.append((part[0], part[1]))
         return budget_list
 
     def create_budget(self, budget):
+        """saves budget to database
+
+        Args:
+            budget (Budget-object): Budget-object of budget wanted to save
+        """
         budgets = self.get_all()
         budgets.append(budget)
         print(budgets)
@@ -64,6 +98,8 @@ class BudgetRepository:
                        (name, username))
         self._connection.commit()
 
+
+### DO SOMETHING TO UPDATING BUDGET AND TOPIC FUNCTIONS ?????
     def update_budget(self, budget_name, username, income, 
                       rent, groceries, transportation, hobbies):
         cursor = self._connection.cursor()
@@ -101,8 +137,13 @@ class BudgetRepository:
         return topics
 
     def delete(self):
+        """deletes all budgets from database"""
         with open(self._file_path, "w") as file:
             file.write("")
+        cursor = self._connection.cursor()
+        cursor.execute("DELETE FROM budgets")
+        cursor.execute("DELETE FROM topics")
+        self._connection.commit()
 
 
 budget_repository = BudgetRepository(

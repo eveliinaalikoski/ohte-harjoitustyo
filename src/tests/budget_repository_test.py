@@ -15,13 +15,23 @@ class TestBudgetRepository(unittest.TestCase):
         self.budget2 = Budget("dos", self.user_marta.username)
 
     def test_find_by_username(self):
-        pass
+        budgets = budget_repository.find_by_username(self.user_berta.username)
+        self.assertEqual(len(budgets), 0)
+
+        budget_repository.create_budget(self.budget1)
+        budgets = budget_repository.find_by_username(self.user_berta.username)
+        self.assertEqual(len(budgets), 1)
 
     def test_get_by_budget_name(self):
-        pass
+        budget_repository.create_budget(self.budget1)
+        budget = budget_repository.get_by_budget_name(self.budget1.name, self.user_berta.username)
+        self.assertEqual(len(budget), 7)
 
     def test_add_topic(self):
-        pass
+        budget_repository.create_budget(self.budget2)
+        budget_repository.add_topic(self.budget2.name, "topic")
+        topics = budget_repository.get_topics(self.budget2.name)
+        self.assertEqual(len(topics), 1)
 
     def test_delete(self):
         budget_repository.create_budget(self.budget1)

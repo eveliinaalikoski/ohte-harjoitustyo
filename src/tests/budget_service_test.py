@@ -7,8 +7,9 @@ from entities.budget import Budget
 
 
 class BudgetRepositoryTests:
-    def __init__(self, budgets=None):
+    def __init__(self, budgets=None, topics=None):
         self.budgets = budgets or []
+        self.topics = topics or []
 
     def get_all(self):
         return self.budgets
@@ -26,6 +27,13 @@ class BudgetRepositoryTests:
     def create_budget(self, budget):
         self.budgets.append(budget)
         return budget
+
+    def add_topic(self, topic, budget_name):
+        self.topics.append((budget_name, topic, 0))
+
+    def get_topics(self, budget_name):
+        own = filter(lambda topic: budget_name == topic[0], self.topics)
+        return own
 
     def delete(self):
         self.budgets = []
@@ -124,3 +132,33 @@ class TestBudgetService(unittest.TestCase):
         # self.assertEqual(info[2], self.budget1.username)
         # self.assertEqual(info[3], self.budget1.username)
         # self.assertEqual()
+
+    def test_check_budget_name_nonexisting_name(self):
+        self.login_user(self.user_test)
+        ok = self.budget_service.check_budget_name(self.budget1.name)
+        self.assertEqual(ok, True)
+
+    def test_check_budget_name_existing_name(self):
+        self.login_user(self.user_test)
+        self.budget_service.create_budget(self.budget1.name)
+        self.budget_service.create_budget(self.budget2.name)
+        ok = self.budget_service.check_budget_name(self.budget1.name)
+        self.assertEqual(ok, False)
+
+    # def test_add_topic(self):
+    #     self.login_user(self.user_test)
+    #     self.budget_service.create_budget(self.budget1.name)
+    #     self.budget_service.add_topic(self.budget1.name, "testing")
+    #     topic = self.budget_service.get_topics(self.budget1.name)
+    #     self.assertEqual(topic[0], "testing")
+
+    # def test_get_topics(self):
+    #     self.login_user(self.user_test)
+    #     self.budget_service.create_budget(self.budget1.name)
+    #     topic = self.budget_service.get_topics(self.budget1.name)
+    #     self.assertEqual(len(topic), 0)
+
+    #     self.budget_service.add_topic(self.budget1.name, "testing")
+    #     topic = self.budget_service.get_topics(self.budget1.name)
+    #     self.assertEqual(len(topic), 1)
+    #     self.assertEqual(topic[0], "testing")

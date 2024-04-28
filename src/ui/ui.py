@@ -5,11 +5,18 @@ from ui.budget_view import BudgetView
 
 
 class UI:
+    """Class responsible for the user interface"""
     def __init__(self, root):
+        """Class constructor, creates new ui class
+
+        Args:
+            root: Tkinter-element where the view is created
+        """
         self._root = root
         self._current_view = None
 
     def start(self):
+        """Starts user interface"""
         self._show_login_view()
 
     def _hide_current_view(self):

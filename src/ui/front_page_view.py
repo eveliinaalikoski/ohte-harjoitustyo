@@ -1,14 +1,19 @@
 from tkinter import ttk, constants, StringVar
 from services.budget_service import budget_service
-from entities.budget import Budget
-from ui.budget_view import BudgetView
 
 
 class BudgetListView:
-    def __init__(self, root, budgets, front_page_view, show_budget_view):
+    """View responsible for listing budgets"""
+    def __init__(self, root, budgets, show_budget_view):
+        """Class constructor, creates new list view for budgets
+
+        Args:
+            root: Tkinter-element where the view is created
+            budgets (list): list of budgets
+            show_budget_view (value): called to see budget view
+        """
         self._root = root
         self._budgets = budgets
-        self._front_page_view = front_page_view
         self._show_budget_view = show_budget_view
         self._window = None
         self._budget_view = None
@@ -16,9 +21,11 @@ class BudgetListView:
         self._budget_window()
 
     def pack(self):
+        """shows window"""
         self._window.pack(fill=constants.X)
 
     def destroy(self):
+        """destroys window"""
         self._window.destroy()
 
     def _budget_view_helper(self, budget_name):
@@ -42,7 +49,15 @@ class BudgetListView:
 
 
 class FrontPageView:
+    """View responsible for showing front page"""
     def __init__(self, root, show_budget_view, handle_logout):
+        """Class constructor, creates new front page view
+
+        Args:
+            root: Tkinter-element where the view is created
+            show_budget_view (value): called to see budget view
+            handle_logout (value): called when logging out
+        """
         self._root = root
         self._show_budget_view = show_budget_view
         self._handle_logout = handle_logout
@@ -50,12 +65,15 @@ class FrontPageView:
         self._budget_list_view = None
         self._error_variable = None
         self._error_label = None
+        self._user = budget_service.get_current_user()
         self._front_page_view()
 
     def pack(self):
+        """shows window"""
         self._window.pack(fill=constants.X)
 
     def destroy(self):
+        """destroys window"""
         self._window.destroy()
 
     def _show_error(self, message):
@@ -114,7 +132,6 @@ class FrontPageView:
         budgets = budget_service.get_budgets()
         self._budget_list_view = BudgetListView(self._front_page_frame,
                                                 budgets,
-                                                self._front_page_view,
                                                 self._show_budget_view)
         self._budget_list_view.pack()
 

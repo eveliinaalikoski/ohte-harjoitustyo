@@ -3,7 +3,14 @@ from services.budget_service import budget_service
 
 
 class LogoutView:
+    """View responsible for user logout"""
     def __init__(self, root, handle_logout):
+        """Class constructor, creates new logout view
+
+        Args:
+            root: Tkinter-element where the view is created
+            handle_logout (value): called when logout successful
+        """
         self._root = root
         self._handle_logout = handle_logout
         self._frame = None
@@ -11,9 +18,11 @@ class LogoutView:
         self._initialize()
 
     def pack(self):
+        """shows window"""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """destroys window"""
         self._frame.destroy()
 
     def _logout_handler(self):

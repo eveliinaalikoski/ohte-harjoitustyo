@@ -3,7 +3,14 @@ from services.budget_service import budget_service, InvalidCredentialsError, Use
 
 
 class LoginView:
+    """View responsible for user login and registeration"""
     def __init__(self, root, handle_login):
+        """Class constructor, creates new login view
+
+        Args:
+            root: Tkinter-element where the view is created
+            handle_login (value): called when login/register successful
+        """
         self._root = root
         self._handle_login = handle_login
         self._frame = None
@@ -15,9 +22,11 @@ class LoginView:
         self._initialize()
 
     def pack(self):
+        """shows window"""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """destroys window"""
         self._frame.destroy()
 
     def _initialize(self):
