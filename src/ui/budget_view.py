@@ -4,6 +4,7 @@ from services.budget_service import budget_service
 
 class BudgetView:
     """View responsible for showing budget view"""
+
     def __init__(self, root, budget_name, to_front_page):
         """class constructor, creates new budget view
 
@@ -19,7 +20,9 @@ class BudgetView:
         self._window = None
         self._update_button = None
         self._add_topic_text = None
-        self._add_entry = None
+        self._topic_entry = None
+        self._add_amount_text = None
+        self._amount_entry = None
         self._add_button = None
 
         self._budget_window()
@@ -57,8 +60,7 @@ class BudgetView:
         self._income_expences_field(budget[2], expences)
         self._rent_field(budget[3])
         self._groceries_field(budget[4])
-        self._transportation_field(budget[5])
-        self._hobbies_field(budget[6])
+        self._hobbies_field(budget[5])
         self._more_field(topics)
         self._total(budget[2], expences)
 
@@ -112,18 +114,6 @@ class BudgetView:
                                    padx=5, pady=5,
                                    sticky=constants.EW)
 
-    def _transportation_field(self, transportation):
-        transportation_text = ttk.Label(master=self._budget_frame,
-                                        text="   transportation:")
-        self._transportation_entry = ttk.Entry(master=self._budget_frame)
-        self._transportation_entry.insert(0, transportation)
-        transportation_text.grid(row=12, column=0,
-                                 padx=5, pady=5,
-                                 sticky=constants.EW)
-        self._transportation_entry.grid(row=12, column=1,
-                                        padx=5, pady=5,
-                                        sticky=constants.EW)
-
     def _hobbies_field(self, hobbies):
         hobbies_text = ttk.Label(master=self._budget_frame,
                                  text="   hobbies:")
@@ -138,63 +128,78 @@ class BudgetView:
 
     def _more_field(self, more):
         self._row = 16
-        self._topics = []
         for m in more:
             string = "   " + m[0] + ":"
-            more_text = ttk.Label(master=self._budget_frame,
-                                  text=string)
-            self._more_entry = ttk.Entry(master=self._budget_frame)
-            self._more_entry.insert(0, m[1])
-            more_text.grid(row=self._row, column=0,
-                           padx=5, pady=5,
-                           sticky=constants.EW)
-            self._more_entry.grid(row=self._row, column=1,
-                                  padx=5, pady=5,
-                                  sticky=constants.EW)
+            topic_text = ttk.Label(master=self._budget_frame,
+                                   text=string)
+            amount_text = ttk.Label(master=self._budget_frame, text=m[1])
+            topic_text.grid(row=self._row, column=0,
+                            padx=5, pady=5,
+                            sticky=constants.EW)
+            amount_text.grid(row=self._row, column=1,
+                             padx=5, pady=5,
+                             sticky=constants.EW)
             self._row += 2
-            amount = self._more_entry.get()
-            if not amount:
-                amount = 0
-            self._topics.append((m[0], amount))
-
-    def _topic_update(self):
-        # doesn't work yet, it should go through the added topics
-        # at this point, not in more_field like it does now
-        for topic in self._topics:
-            print("topic update", topic[0], topic[1])
-            budget_service.update_topics(self._budget_name, topic[0], topic[1])
 
     def _add_more(self):
-        if self._add_entry or self._add_topic_text or self._add_button:
-            self._add_entry.destroy()
+        if (self._add_topic_text or self._topic_entry or
+            self._add_amount_text or self._amount_entry or
+                self._add_button):
             self._add_topic_text.destroy()
+            self._topic_entry.destroy()
+            self._add_amount_text.destroy()
+            self._amount_entry.destroy()
             self._add_button.destroy()
 
         self._add_topic_text = ttk.Label(
-            master=self._budget_frame, text="create new topic:")
-        self._add_entry = ttk.Entry(master=self._budget_frame)
+            master=self._budget_frame, text="new topic:")
+        self._topic_entry = ttk.Entry(master=self._budget_frame)
+        self._add_amount_text = ttk.Label(
+            master=self._budget_frame, text="amount:")
+        self._amount_entry = ttk.Entry(master=self._budget_frame)
         self._add_button = ttk.Button(master=self._budget_frame,
                                       text="Add",
                                       command=self._add_helper)
         self._add_topic_text.grid(row=self._row, column=0,
                                   padx=5, pady=5,
                                   sticky=constants.EW)
+        self._add_amount_text.grid(row=self._row, column=1,
+                                   padx=5, pady=5,
+                                   sticky=constants.EW)
         self._row += 2
-        self._add_entry.grid(row=self._row, column=0,
-                             padx=5, pady=5,
-                             sticky=constants.EW)
+        self._topic_entry.grid(row=self._row, column=0,
+                               padx=5, pady=5,
+                               sticky=constants.EW)
+        self._amount_entry.grid(row=self._row, column=1,
+                                padx=5, pady=5,
+                                sticky=constants.EW)
+        self._row += 2
         self._add_button.grid(row=self._row, column=1,
                               padx=5, pady=5,
                               sticky=constants.W)
 
     def _add_helper(self):
-        topic_entry = self._add_entry.get()
-        if topic_entry:
-            budget_service.add_topic(self._budget_name, topic_entry)
+        topic_entry = self._topic_entry.get()
+        amount_entry = self._amount_entry.get()
+        try:
+            int(amount_entry)
+        except ValueError:
+            # add error message!!
             self._budget_info()
             self._updating_button()
             self._add_more()
-            self._add_entry.delete(0, constants.END)
+            self._topic_entry.delete(0, constants.END)
+            self._amount_entry.delete(0, constants.END)
+            return
+
+        if topic_entry and amount_entry:
+            budget_service.add_topic(
+                self._budget_name, topic_entry, amount_entry)
+            self._budget_info()
+            self._updating_button()
+            self._add_more()
+            self._topic_entry.delete(0, constants.END)
+            self._amount_entry.delete(0, constants.END)
 
     def _total(self, income, expences):
         money = income - expences
@@ -227,9 +232,6 @@ class BudgetView:
         groceries = self._groceries_entry.get()
         if not groceries:
             groceries = 0
-        transportation = self._transportation_entry.get()
-        if not transportation:
-            transportation = 0
         hobbies = self._hobbies_entry.get()
         if not hobbies:
             hobbies = 0
@@ -238,9 +240,7 @@ class BudgetView:
                                      income,
                                      rent,
                                      groceries,
-                                     transportation,
                                      hobbies)
-        self._topic_update()
         self._budget_info()
 
     def _budget_window(self):
