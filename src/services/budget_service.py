@@ -16,6 +16,7 @@ class UsernameAlreadyExistsError(Exception):
 
 class BudgetService:
     """class responsible for app logic"""
+
     def __init__(self,
                  user_repository=default_user_repository,
                  budget_repository=default_budget_repository):
@@ -119,20 +120,19 @@ class BudgetService:
         return list(info)
 
 
-### DO SOMETHING TO THIS ????
+# DO SOMETHING TO THIS ????
+
     def update_budget(self, budget_name,
                       username,
                       income,
                       rent,
                       groceries,
-                      transportation,
                       hobbies):
         self._budget_repository.update_budget(budget_name,
                                               username,
                                               income,
                                               rent,
                                               groceries,
-                                              transportation,
                                               hobbies)
 
     def check_budget_name(self, budget_name):
@@ -144,22 +144,15 @@ class BudgetService:
         Returns:
             Boolean: boolean-value of if the name is free
         """
-        all = self._budget_repository.get_all()
-        print(all)
-        for a in all:
-            print(a)
-            name = a.name
+        budgets = self._budget_repository.get_all()
+        for b in budgets:
+            name = b[0]
             if budget_name == name:
                 return False
         return True
 
-
-### THESE??????
-    def add_topic(self, budget_name, topic_entry):
-        self._budget_repository.add_topic(budget_name, topic_entry)
-
-    def update_topics(self, budget_name, topic, amount):
-        self._budget_repository.update_topic(budget_name, topic, amount)
+    def add_topic(self, budget_name, topic, amount):
+        self._budget_repository.add_topic(budget_name, topic, amount)
 
     def get_topics(self, budget_name):
         topics = self._budget_repository.get_topics(budget_name)
