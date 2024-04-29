@@ -119,9 +119,6 @@ class BudgetService:
         print(list(info))
         return list(info)
 
-
-# DO SOMETHING TO THIS ????
-
     def update_budget(self, budget_name,
                       username,
                       income,
@@ -146,7 +143,10 @@ class BudgetService:
         """
         budgets = self._budget_repository.get_all()
         for b in budgets:
-            name = b[0]
+            if type(b)==tuple:
+                name = b[0]
+            else:
+                name = b.name
             if budget_name == name:
                 return False
         return True
