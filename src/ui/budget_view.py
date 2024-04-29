@@ -19,11 +19,7 @@ class BudgetView:
         self._user = budget_service.get_current_user()
         self._window = None
         self._update_button = None
-        self._add_topic_text = None
-        self._topic_entry = None
-        self._add_amount_text = None
-        self._amount_entry = None
-        self._add_button = None
+        self._more_frame = None
 
         self._budget_window()
 
@@ -142,41 +138,40 @@ class BudgetView:
             self._row += 2
 
     def _add_more(self):
-        if (self._add_topic_text or self._topic_entry or
-            self._add_amount_text or self._amount_entry or
-                self._add_button):
-            self._add_topic_text.destroy()
-            self._topic_entry.destroy()
-            self._add_amount_text.destroy()
-            self._amount_entry.destroy()
-            self._add_button.destroy()
-
-        self._add_topic_text = ttk.Label(
-            master=self._budget_frame, text="new topic:")
-        self._topic_entry = ttk.Entry(master=self._budget_frame)
-        self._add_amount_text = ttk.Label(
-            master=self._budget_frame, text="amount:")
-        self._amount_entry = ttk.Entry(master=self._budget_frame)
-        self._add_button = ttk.Button(master=self._budget_frame,
+        self._row += 2
+        if self._more_frame:
+            self._more_frame.destroy()
+        self._more_frame = ttk.Frame(master=self._budget_frame)
+        bg = ttk.Label(master=self._more_frame, background="#90bb92")
+        add_topic_text = ttk.Label(
+            master=self._more_frame, text="new topic:", background="#90bb92")
+        self._topic_entry = ttk.Entry(master=self._more_frame)
+        add_amount_text = ttk.Label(
+            master=self._more_frame, text="amount:", background="#90bb92")
+        self._amount_entry = ttk.Entry(master=self._more_frame)
+        add_button = ttk.Button(master=self._more_frame,
                                       text="Add",
                                       command=self._add_helper)
-        self._add_topic_text.grid(row=self._row, column=0,
+        bg.grid(row=0, column=0, rowspan=8, columnspan=2,
+                padx=5, pady=5, sticky=(constants.NS, constants.EW))
+        add_topic_text.grid(row=2, column=0,
                                   padx=5, pady=5,
                                   sticky=constants.EW)
-        self._add_amount_text.grid(row=self._row, column=1,
+        add_amount_text.grid(row=2, column=1,
                                    padx=5, pady=5,
                                    sticky=constants.EW)
-        self._row += 2
-        self._topic_entry.grid(row=self._row, column=0,
+        self._topic_entry.grid(row=4, column=0,
                                padx=5, pady=5,
                                sticky=constants.EW)
-        self._amount_entry.grid(row=self._row, column=1,
+        self._amount_entry.grid(row=4, column=1,
                                 padx=5, pady=5,
                                 sticky=constants.EW)
-        self._row += 2
-        self._add_button.grid(row=self._row, column=1,
+        add_button.grid(row=6, column=1,
                               padx=5, pady=5,
                               sticky=constants.W)
+        self._more_frame.grid(row=self._row, column=0,
+                                columnspan=2,
+                                sticky=(constants.EW))
 
     def _add_helper(self):
         topic_entry = self._topic_entry.get()
