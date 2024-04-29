@@ -26,11 +26,22 @@ class TestBudgetRepository(unittest.TestCase):
         budget_repository.create_budget(self.budget1)
         budget = budget_repository.get_by_budget_name(
             self.budget1.name, self.user_berta.username)
-        self.assertEqual(len(budget), 7)
+        self.assertEqual(len(budget), 6)
+
+    def test_update_budget(self):
+        budget_repository.create_budget(self.budget1)
+        budget_repository.update_budget(self.budget1.name, self.budget1.username,
+                                        1, 2, 3, 4)
+        budget = budget_repository.get_by_budget_name(
+            self.budget1.name, self.budget1.username)
+        self.assertEqual(budget[2], 1)
+        self.assertEqual(budget[3], 2)
+        self.assertEqual(budget[4], 3)
+        self.assertEqual(budget[5], 4)
 
     def test_add_topic(self):
         budget_repository.create_budget(self.budget2)
-        budget_repository.add_topic(self.budget2.name, "topic")
+        budget_repository.add_topic(self.budget2.name, "topic", 0)
         topics = budget_repository.get_topics(self.budget2.name)
         self.assertEqual(len(topics), 1)
 
