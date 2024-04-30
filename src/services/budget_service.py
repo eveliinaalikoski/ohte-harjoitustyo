@@ -143,7 +143,7 @@ class BudgetService:
         """
         budgets = self._budget_repository.get_all()
         for b in budgets:
-            if type(b)==tuple:
+            if isinstance(b)==tuple:
                 name = b[0]
             else:
                 name = b.name
