@@ -22,6 +22,9 @@
 | 21.4. | 2 | budgetview (topics) |
 | 22.4. | 2.5 | budgetview (topics update) |
 | 23.4. | 1.5 | lint errors & architecture & release |
+| 25.4. | 2 | tests |
+| 28.4. | 2.5 | sequence diagram & docstrings & tests |
+|  | 2 | budget view |
+| 29.4. | 3 | budget view & tests & documentation |
 |  |  |  |
-|  |  |  |
-|  |  | = 31 h |
+|  |  | = 40.5 h |
