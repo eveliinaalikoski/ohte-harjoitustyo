@@ -28,3 +28,8 @@
 - budget categories can be updated
 - user can add topics to budgets (can't update them yet)
 - tests: BudgetService, BudgetRepository, UserRepository
+
+## Week 6
+
+- user can add topics and the amount (this can't be edited later)
+- tests: BudgetService, BudgetRepository, UserRepository
