@@ -190,6 +190,7 @@ class BudgetView:
         if topic_entry and amount_entry:
             budget_service.add_topic(
                 self._budget_name, topic_entry, amount_entry)
+            self._update()
             self._budget_info()
             self._updating_button()
             self._add_more()
