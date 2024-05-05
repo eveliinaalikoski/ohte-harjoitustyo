@@ -78,9 +78,16 @@ class BudgetRepository:
         Args:
             budget (Budget-object): Budget-object of budget wanted to save
         """
-        budgets = self.get_all()
-        budgets.append(budget)
+        # budgets = self.get_all()
+        # budgets.append(budget)
         self._add(budget)
+    
+    def check_budget_name(self, budget_name):
+        budgets = self.get_all()
+        for b in budgets:
+            if budget_name == b[0]:
+                return False
+        return True
 
     def _add(self, budget):
         self._file_exists()
