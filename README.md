@@ -6,39 +6,55 @@ App to plan your spendings with budgets. You can create as many budgets you need
 
 ### dokumentation
 
-- [working hours](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+- [user manual](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 - [description](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
-- [changelog](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 - [architecture](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+- [testing document](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/testausdokumentti.md)
+- [working hours](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+- [changelog](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
 ### installation
 
 1. Install dependencies:
 
-```poetry install```
+```bash
+poetry install
+```
 
 2. Perform required base command:
 
-```poetry run invoke build```
+```bash
+poetry run invoke build
+```
 
 3. Start the app:
 
-```poetry run invoke start```
+```bash
+poetry run invoke start
+```
 
 ### Optional commands
 
 run program:
 
-```poetry run invoke start```
+```bash
+poetry run invoke start
+```
 
 perform tests:
 
-```poetry run invoke test```
+```bash
+poetry run invoke test
+```
 
 test coverage report:
 
-```poetry run invoke coverage-report```
+```bash
+poetry run invoke coverage-report
+```
 
 Pylint check
 
-```poetry run invoke lint```
+```bash
+poetry run invoke lint
+```
