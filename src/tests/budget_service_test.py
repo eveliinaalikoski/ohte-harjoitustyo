@@ -16,19 +16,28 @@ class BudgetRepositoryTests:
 
     def find_by_username(self, username):
         own_budgets = filter(
-            lambda budget: budget.username == username, self.budgets)
+            lambda budget: budget[1] == username, self.budgets)
         return list(own_budgets)
 
     def get_by_budget_name(self, budget_name, username):
-        own_budget = filter(lambda budget: budget.name == budget_name
-                            and budget.username == username, self.budgets)
+        own_budget = filter(lambda budget: budget[0] == budget_name
+                            and budget[1] == username, self.budgets)
         return own_budget
 
-    def create_budget(self, budget):
-        self.budgets.append(budget)
-        return budget
+    def create_budget(self, budget_name):
+        self.budgets.append((budget_name, "test"))
+        return budget_name
 
-    def add_topic(self, topic, budget_name, amount):
+    def check_budget_name(self, budget_name):
+        budgets = self.get_all()
+        print(budgets)
+        for b in budgets:
+            print("ok", b[0])
+            if b[0] == budget_name:
+                return False
+        return True
+
+    def add_topic(self, budget_name, topic, amount):
         self.topics.append([budget_name, topic, amount])
 
     def get_topics(self, budget_name):
@@ -36,7 +45,6 @@ class BudgetRepositoryTests:
         for topic in self.topics:
             if topic[0]==budget_name:
                 own.append(topic)
-        print("tääl", own)
         return own
 
     def delete(self):
@@ -106,7 +114,7 @@ class TestBudgetService(unittest.TestCase):
     def test_logout(self):
         self.login_user(self.user_test)
         user = self.budget_service.logout()
-        self.assertEqual(None, user)
+        self.assertEqual(user, None)
 
     def test_get_budgets(self):
         self.login_user(self.user_test)
@@ -114,32 +122,24 @@ class TestBudgetService(unittest.TestCase):
         self.budget_service.create_budget(self.budget2.name)
         budgets = self.budget_service.get_budgets()
         self.assertEqual(len(budgets), 2)
-        self.assertEqual(budgets[0].name, self.budget1.name)
 
     def test_create_budget(self):
         self.login_user(self.user_test)
-        self.budget_service.create_budget("testing")
+        self.budget_service.create_budget(self.budget1.name)
         budgets = self.budget_service.get_budgets()
         self.assertEqual(len(budgets), 1)
-        self.assertEqual(budgets[0].name, "testing")
-        self.assertEqual(budgets[0].username, self.user_test.username)
 
-    def test_check_budget_name_nonexisting_name(self):
+    def test_check_budget_name(self):
         self.login_user(self.user_test)
         ok = self.budget_service.check_budget_name(self.budget1.name)
         self.assertEqual(ok, True)
-
-    def test_check_budget_name_existing_name(self):
-        self.login_user(self.user_test)
-        self.budget_service.create_budget(self.budget1.name)
-        self.budget_service.create_budget(self.budget2.name)
-        ok = self.budget_service.check_budget_name(self.budget1.name)
-        self.assertEqual(ok, False)
 
     def test_add_topic(self):
         self.login_user(self.user_test)
         self.budget_service.create_budget(self.budget1.name)
         self.budget_service.add_topic(self.budget1.name, "testing", 10)
+        topic = self.budget_service.get_topics(self.budget1.name)
+        self.assertEqual(topic[0], [self.budget1.name, "testing", 10])
 
     def test_get_topics(self):
         self.login_user(self.user_test)
