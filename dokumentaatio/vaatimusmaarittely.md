@@ -32,5 +32,5 @@
 
 - expanding the budget categories (user could add it themselves) ✔️
 - description for budgets
-- editing budgets (name, categories)
+- editing budgets (name, categories) ✔️ *can edit categories*
 - adding graphics (tables, diagrams)
