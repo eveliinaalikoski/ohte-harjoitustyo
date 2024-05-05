@@ -26,5 +26,7 @@
 | 28.4. | 2.5 | sequence diagram & docstrings & tests |
 |  | 2 | budget view |
 | 29.4. | 3 | budget view & tests & documentation |
+| 5.5. | 1.5 | tests & fixes |
+|  | 1 | architecture, user manual |
 |  |  |  |
-|  |  | = 40.5 h |
+|  |  | = 43 h |
