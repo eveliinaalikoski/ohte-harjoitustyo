@@ -28,6 +28,15 @@ class TestBudgetRepository(unittest.TestCase):
             self.budget1.name, self.user_berta.username)
         self.assertEqual(len(budget), 6)
 
+    def test_check_budget_name_nonexisting_name(self):
+        ok = budget_repository.check_budget_name(self.budget1.name)
+        self.assertEqual(ok, True)
+
+    def test_check_budget_name_existing_name(self):
+        budget_repository.create_budget(self.budget1)
+        ok = budget_repository.check_budget_name(self.budget1.name)
+        self.assertEqual(ok, False)
+
     def test_update_budget(self):
         budget_repository.create_budget(self.budget1)
         budget_repository.update_budget(self.budget1.name, self.budget1.username,
