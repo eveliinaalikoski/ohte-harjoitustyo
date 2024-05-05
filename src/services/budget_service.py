@@ -141,15 +141,7 @@ class BudgetService:
         Returns:
             Boolean: boolean-value of if the name is free
         """
-        budgets = self._budget_repository.get_all()
-        for b in budgets:
-            if isinstance(b)==tuple:
-                name = b[0]
-            else:
-                name = b.name
-            if budget_name == name:
-                return False
-        return True
+        return self._budget_repository.check_budget_name(budget_name)
 
     def add_topic(self, budget_name, topic, amount):
         self._budget_repository.add_topic(budget_name, topic, amount)
