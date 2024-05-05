@@ -4,7 +4,7 @@ Load the source code from the latest release.
 
 ## Configuration
 
-File names used to save information, are in .env -file (located in the start directory). Files are created to data -directory.
+File names used to save information, are in .env -file (located in the start directory). Files are created to data directory.
 
 ## Installation
 
