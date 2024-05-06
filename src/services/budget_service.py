@@ -116,7 +116,6 @@ class BudgetService:
         """
         info = self._budget_repository.get_by_budget_name(
             budget_name, username)
-        print(list(info))
         return list(info)
 
     def update_budget(self, budget_name,
