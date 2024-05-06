@@ -43,7 +43,7 @@ class BudgetRepositoryTests:
     def get_topics(self, budget_name):
         own = []
         for topic in self.topics:
-            if topic[0]==budget_name:
+            if topic[0] == budget_name:
                 own.append(topic)
         return own
 
