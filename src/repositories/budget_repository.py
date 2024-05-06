@@ -65,7 +65,7 @@ class BudgetRepository:
     def _read(self):
         self._file_exists()
         budget_list = []
-        with open(self._file_path) as file:
+        with open(self._file_path, encoding="UTF-8") as file:
             for row in file:
                 row = row.replace("\n", "")
                 part = row.split(";")
@@ -81,7 +81,7 @@ class BudgetRepository:
         # budgets = self.get_all()
         # budgets.append(budget)
         self._add(budget)
-    
+
     def check_budget_name(self, budget_name):
         budgets = self.get_all()
         for b in budgets:
@@ -93,7 +93,7 @@ class BudgetRepository:
         self._file_exists()
         name = budget.name
         username = budget.username
-        with open(self._file_path, "a") as file:
+        with open(self._file_path, "a", encoding="UTF-8") as file:
             file.write((name)+";")
             file.write((username)+"\n")
 
@@ -131,7 +131,7 @@ class BudgetRepository:
 
     def delete(self):
         """deletes all budgets from database"""
-        with open(self._file_path, "w") as file:
+        with open(self._file_path, "w", encoding="UTF-8") as file:
             file.write("")
         cursor = self._connection.cursor()
         cursor.execute("DELETE FROM budgets")
