@@ -150,16 +150,16 @@ class BudgetView:
             master=self._more_frame, text="amount:", background="#90bb92")
         self._amount_entry = ttk.Entry(master=self._more_frame)
         add_button = ttk.Button(master=self._more_frame,
-                                      text="Add",
-                                      command=self._add_helper)
+                                text="Add",
+                                command=self._add_helper)
         bg.grid(row=0, column=0, rowspan=8, columnspan=2,
                 padx=5, pady=5, sticky=(constants.NS, constants.EW))
         add_topic_text.grid(row=2, column=0,
-                                  padx=5, pady=5,
-                                  sticky=constants.EW)
+                            padx=5, pady=5,
+                            sticky=constants.EW)
         add_amount_text.grid(row=2, column=1,
-                                   padx=5, pady=5,
-                                   sticky=constants.EW)
+                             padx=5, pady=5,
+                             sticky=constants.EW)
         self._topic_entry.grid(row=4, column=0,
                                padx=5, pady=5,
                                sticky=constants.EW)
@@ -167,11 +167,11 @@ class BudgetView:
                                 padx=5, pady=5,
                                 sticky=constants.EW)
         add_button.grid(row=6, column=1,
-                              padx=5, pady=5,
-                              sticky=constants.W)
+                        padx=5, pady=5,
+                        sticky=constants.W)
         self._more_frame.grid(row=self._row, column=0,
-                                columnspan=2,
-                                sticky=(constants.EW))
+                              columnspan=2,
+                              sticky=(constants.EW))
 
     def _add_helper(self):
         topic_entry = self._topic_entry.get()
@@ -179,7 +179,6 @@ class BudgetView:
         try:
             int(amount_entry)
         except ValueError:
-            # add error message!!
             self._budget_info()
             self._updating_button()
             self._add_more()
