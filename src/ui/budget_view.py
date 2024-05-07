@@ -1,4 +1,4 @@
-from tkinter import ttk, constants
+from tkinter import ttk, constants, StringVar
 from services.budget_service import budget_service
 
 
@@ -20,6 +20,8 @@ class BudgetView:
         self._window = None
         self._update_button = None
         self._more_frame = None
+        self._error_variable = None
+        self._error_label = None
 
         self._budget_window()
 
@@ -30,6 +32,13 @@ class BudgetView:
     def destroy(self):
         """destroys window"""
         self._window.destroy()
+
+    def _show_error(self, message):
+        self._error_variable.set(message)
+        self._error_label.grid()
+
+    def _hide_error(self):
+        self._error_label.grid_remove()
 
     def _label(self):
         front_button = ttk.Button(master=self._budget_frame,
@@ -181,11 +190,12 @@ class BudgetView:
         except ValueError:
             self._budget_info()
             self._updating_button()
+            self._show_error("amount can contain only numbers")
             self._add_more()
             self._topic_entry.delete(0, constants.END)
             self._amount_entry.delete(0, constants.END)
             return
-
+        self._hide_error()
         if topic_entry and amount_entry:
             budget_service.add_topic(
                 self._budget_name, topic_entry, amount_entry)
@@ -198,7 +208,7 @@ class BudgetView:
 
     def _total(self, income, expences):
         money = income - expences
-        total = "total:", money
+        total = "total:", money, "€"
         total_text = ttk.Label(master=self._budget_frame,
                                text=total, background="#287ed7")
         total_text.grid(row=self._row, column=1,
@@ -217,19 +227,20 @@ class BudgetView:
                                  sticky=constants.W)
         self._row += 2
 
+    def _correct_values(self, amount):
+        try:
+            int(amount)
+        except ValueError:
+            amount = 0
+        amount = amount if amount else 0
+        return amount
+
     def _update(self):
-        income = self._income_entry.get()
-        if not income:
-            income = 0
-        rent = self._rent_entry.get()
-        if not rent:
-            rent = 0
-        groceries = self._groceries_entry.get()
-        if not groceries:
-            groceries = 0
-        hobbies = self._hobbies_entry.get()
-        if not hobbies:
-            hobbies = 0
+        income = self._correct_values(self._income_entry.get())
+        rent = self._correct_values(self._rent_entry.get())
+        groceries = self._correct_values(self._groceries_entry.get())
+        hobbies = self._correct_values(self._hobbies_entry.get())
+        
         budget_service.update_budget(self._budget_name,
                                      self._user.username,
                                      income,
@@ -246,6 +257,12 @@ class BudgetView:
         self._budget_info()
         self._updating_button()
         self._add_more()
+
+        self._error_variable = StringVar(self._window)
+        self._error_label = ttk.Label(master=self._window,
+                                      textvariable=self._error_variable,
+                                      foreground="red")
+        self._error_label.grid(row=self._row, padx=5, pady=5)
 
         self._budget_frame.grid(row=4, column=0,
                                 columnspan=2,
