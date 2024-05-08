@@ -30,29 +30,12 @@ class LoginView:
         """destroys window"""
         self._frame.destroy()
 
-    def _initialize(self):
-        self._frame = ttk.Frame(master=self._root)
-        self._error_variable = StringVar(self._frame)
-        self._error_label = ttk.Label(master=self._frame,
-                                      textvariable=self._error_variable,
-                                      foreground="red")
-        self._error_label.grid(padx=5, pady=5)
+    def _show_error(self, message):
+        self._error_variable.set(message)
+        self._error_label.grid()
 
-        self._initialize_username_field()
-        self._initialize_password_field()
-
-        login_button = ttk.Button(master=self._frame,
-                                  text="Login",
-                                  command=self._login_handler)
-
-        register_button = ttk.Button(master=self._frame,
-                                     text="Register",
-                                     command=self._register_handler)
-
-        self._frame.grid_columnconfigure(0, weight=2, minsize=400)
-        login_button.grid(padx=5, pady=5, sticky=constants.W)
-        register_button.grid(padx=5, pady=5, sticky=constants.W)
-        self._hide_error()
+    def _hide_error(self):
+        self._error_label.grid_remove()
 
     def _initialize_username_field(self):
         username_label = ttk.Label(master=self._frame, text="Username")
@@ -88,10 +71,28 @@ class LoginView:
             self._handle_login()
         except UsernameAlreadyExistsError:
             self._show_error("Username is already taken")
+        
+    def _buttons(self):
+        login_button = ttk.Button(master=self._frame,
+                                  text="Login",
+                                  command=self._login_handler)
+        register_button = ttk.Button(master=self._frame,
+                                     text="Register",
+                                     command=self._register_handler)
+        login_button.grid(padx=5, pady=5, sticky=constants.W)
+        register_button.grid(padx=5, pady=5, sticky=constants.W)
 
-    def _show_error(self, message):
-        self._error_variable.set(message)
-        self._error_label.grid()
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+        self._error_variable = StringVar(self._frame)
+        self._error_label = ttk.Label(master=self._frame,
+                                      textvariable=self._error_variable,
+                                      foreground="red")
+        self._error_label.grid(padx=5, pady=5)
 
-    def _hide_error(self):
-        self._error_label.grid_remove()
+        self._initialize_username_field()
+        self._initialize_password_field()
+        self._buttons()
+
+        self._frame.grid_columnconfigure(0, weight=2, minsize=400)
+        self._hide_error()
