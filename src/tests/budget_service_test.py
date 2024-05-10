@@ -30,9 +30,7 @@ class BudgetRepositoryTests:
 
     def check_budget_name(self, budget_name):
         budgets = self.get_all()
-        print(budgets)
         for b in budgets:
-            print("ok", b[0])
             if b[0] == budget_name:
                 return False
         return True

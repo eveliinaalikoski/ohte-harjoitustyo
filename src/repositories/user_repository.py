@@ -51,7 +51,6 @@ class UserRepository:
         cursor = self._connection.cursor()
         row = cursor.execute("""SELECT * FROM users
                        WHERE username = ?""", [username]).fetchone()
-        print(row)
         if not row:
             return None
         return User(row[0], row[1])

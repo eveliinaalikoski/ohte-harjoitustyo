@@ -78,8 +78,6 @@ class BudgetRepository:
         Args:
             budget (Budget-object): Budget-object of budget wanted to save
         """
-        # budgets = self.get_all()
-        # budgets.append(budget)
         self._add(budget)
 
     def check_budget_name(self, budget_name):
