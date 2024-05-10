@@ -33,3 +33,9 @@
 
 - user can add topics and the amount (this can't be edited later)
 - tests: BudgetService, BudgetRepository, UserRepository
+
+
+## Week 7 (final)
+
+- documentation finished
+- everything works like described in the [vaatimusmaarittely.md](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
