@@ -38,17 +38,19 @@ class LoginView:
         self._error_label.grid_remove()
 
     def _initialize_username_field(self):
-        username_label = ttk.Label(master=self._frame, text="Username", foreground="#810993")
+        username_label = ttk.Label(
+            master=self._frame, text="Username", foreground="#810993")
         self._username_entry = ttk.Entry(master=self._frame)
         username_label.grid(padx=5, pady=5, sticky=constants.W)
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_password_field(self):
-        password_label = ttk.Label(master=self._frame, text="Password", foreground="#810993")
+        password_label = ttk.Label(
+            master=self._frame, text="Password", foreground="#810993")
         self._password_entry = ttk.Entry(master=self._frame)
         password_label.grid(padx=5, pady=5, sticky=constants.W)
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
-        
+
     def _buttons(self):
         login_button = ttk.Button(master=self._frame,
                                   text="Login",

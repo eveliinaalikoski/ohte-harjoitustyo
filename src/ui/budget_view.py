@@ -240,7 +240,7 @@ class BudgetView:
         rent = self._correct_values(self._rent_entry.get())
         groceries = self._correct_values(self._groceries_entry.get())
         hobbies = self._correct_values(self._hobbies_entry.get())
-        
+
         budget_service.update_budget(self._budget_name,
                                      self._user.username,
                                      income,
