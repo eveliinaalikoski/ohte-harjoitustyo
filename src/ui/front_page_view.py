@@ -92,7 +92,7 @@ class FrontPageView:
         label = ttk.Label(master=self._window,
                           text="BudgetBuddy",
                           font=("Arial", 25),
-                          foreground="orange")
+                          foreground="#810993")
         logout_button.grid(row=0, column=0,
                            padx=5, pady=5,
                            sticky=constants.W)

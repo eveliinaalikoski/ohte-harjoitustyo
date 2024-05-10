@@ -47,7 +47,7 @@ class BudgetView:
         label = ttk.Label(master=self._budget_frame,
                           text=self._budget_name,
                           font=("Arial", 25),
-                          foreground="#287ed7")
+                          foreground="#810993")
         front_button.grid(row=0, column=0,
                           padx=5, pady=5,
                           sticky=constants.W)
@@ -72,7 +72,7 @@ class BudgetView:
     def _income_expences_field(self, income, expences):
         income_text = ttk.Label(master=self._budget_frame,
                                 text="income:",
-                                background="#8ac936")
+                                background="#94c48d")
         self._income_entry = ttk.Entry(master=self._budget_frame)
         self._income_entry.insert(0, income)
         income_text.grid(row=4, column=0,
@@ -84,10 +84,10 @@ class BudgetView:
 
         expences_text = ttk.Label(master=self._budget_frame,
                                   text="expences:",
-                                  background="#ed8d12")
+                                  background="#fab25a")
         value_text = ttk.Label(master=self._budget_frame,
                                text=expences,
-                               background="#ed8d12")
+                               background="#fab25a")
         expences_text.grid(row=6, column=0,
                            padx=5, pady=5,
                            sticky=constants.EW)
@@ -151,12 +151,12 @@ class BudgetView:
         if self._more_frame:
             self._more_frame.destroy()
         self._more_frame = ttk.Frame(master=self._budget_frame)
-        bg = ttk.Label(master=self._more_frame, background="#90bb92")
+        bg = ttk.Label(master=self._more_frame, background="#d5f6ce")
         add_topic_text = ttk.Label(
-            master=self._more_frame, text="new topic:", background="#90bb92")
+            master=self._more_frame, text="new topic:", background="#d5f6ce")
         self._topic_entry = ttk.Entry(master=self._more_frame)
         add_amount_text = ttk.Label(
-            master=self._more_frame, text="amount:", background="#90bb92")
+            master=self._more_frame, text="amount:", background="#d5f6ce")
         self._amount_entry = ttk.Entry(master=self._more_frame)
         add_button = ttk.Button(master=self._more_frame,
                                 text="Add",
@@ -210,7 +210,7 @@ class BudgetView:
         money = income - expences
         total = "total:", money, "€"
         total_text = ttk.Label(master=self._budget_frame,
-                               text=total, background="#287ed7")
+                               text=total, background="#8988d3")
         total_text.grid(row=self._row, column=1,
                         padx=5, pady=5,
                         sticky=constants.E)

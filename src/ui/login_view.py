@@ -38,16 +38,26 @@ class LoginView:
         self._error_label.grid_remove()
 
     def _initialize_username_field(self):
-        username_label = ttk.Label(master=self._frame, text="Username")
+        username_label = ttk.Label(master=self._frame, text="Username", foreground="#810993")
         self._username_entry = ttk.Entry(master=self._frame)
         username_label.grid(padx=5, pady=5, sticky=constants.W)
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_password_field(self):
-        password_label = ttk.Label(master=self._frame, text="Password")
+        password_label = ttk.Label(master=self._frame, text="Password", foreground="#810993")
         self._password_entry = ttk.Entry(master=self._frame)
         password_label.grid(padx=5, pady=5, sticky=constants.W)
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
+        
+    def _buttons(self):
+        login_button = ttk.Button(master=self._frame,
+                                  text="Login",
+                                  command=self._login_handler)
+        register_button = ttk.Button(master=self._frame,
+                                     text="Register",
+                                     command=self._register_handler)
+        login_button.grid(padx=5, pady=5, sticky=constants.W)
+        register_button.grid(padx=5, pady=5, sticky=constants.W)
 
     def _login_handler(self):
         username = self._username_entry.get()
@@ -71,16 +81,6 @@ class LoginView:
             self._handle_login()
         except UsernameAlreadyExistsError:
             self._show_error("Username is already taken")
-        
-    def _buttons(self):
-        login_button = ttk.Button(master=self._frame,
-                                  text="Login",
-                                  command=self._login_handler)
-        register_button = ttk.Button(master=self._frame,
-                                     text="Register",
-                                     command=self._register_handler)
-        login_button.grid(padx=5, pady=5, sticky=constants.W)
-        register_button.grid(padx=5, pady=5, sticky=constants.W)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
