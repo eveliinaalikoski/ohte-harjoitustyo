@@ -27,6 +27,10 @@
 |  | 2 | budget view |
 | 29.4. | 3 | budget view & tests & documentation |
 | 5.5. | 1.5 | tests & fixes |
-|  | 1 | architecture, user manual |
+|  | 1 | architecture & user manual |
+| 6.5. | 2 | test-document & description & outlook |
+| 7.5. | 1 | error messages |
+| 8.5. | 1 | outlook & clean code |
+| 10.5. | 2 | outlook & documentation |
 |  |  |  |
-|  |  | = 43 h |
+|  |  | = 49 h |
