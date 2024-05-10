@@ -12,3 +12,10 @@ Repository classes `BudgetRepository` and `UserRepository` are being tested with
 
 ## Test coverage
 
+The test's branch coverage of the app is 95%. User interface not included in the tests
+
+![coverage-report](./pictures/coverage-report.png)
+
+Remained untested:
+- executing files *initialize_database.py* and *build.py* from the command line
+- from file *budget_service.py* functions *get_budget_info* and *update_budget*
