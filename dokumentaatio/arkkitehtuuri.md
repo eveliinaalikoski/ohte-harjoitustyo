@@ -4,7 +4,7 @@
 
 Package diagram of the code:
 
-![Package diagram](./pakkauskaavio.png)
+![Package diagram](./pictures/pakkauskaavio.png)
 
 The program consists of four main parts/directories:
 - package *ui* contains user interface
