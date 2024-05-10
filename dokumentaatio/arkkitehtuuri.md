@@ -48,11 +48,11 @@ Classes `UserRepository` and `BudgetRepository`, located in directory *repositor
 
 ### Files
 
-The app saves information in CSV-file and SQLite-database. In the [.env](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/.env) -file, located in the root of the app, is defined the file names.
+The app saves information in CSV-file and SQLite-database. 
 
-The app saves information to the CSV-file in the format of using semicolon (;) seperating values.
+The names of the files are defined in the [.env](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/.env) -file, located in the root of the app. The app saves information to the CSV-file in the format of using semicolon (;) seperating values.
 
-Information on the users is saved to table `users`, and information on budgets is saved to tables `budgets` and `topics`.
+The database is initialized in the [initialize_database.py](https://github.com/eveliinaalikoski/ohte-harjoitustyo/blob/master/src/initialize_database.py) -file. Information on the users is saved to table `users`, and information on budgets is saved to tables `budgets` and `topics`.
 
 ## Main functionality
 
